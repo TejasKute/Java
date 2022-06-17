@@ -1,0 +1,146 @@
+
+mysql> use dynamite;
+Database changed
+
+mysql> create table student(
+    -> Student_Id int primary key,
+    -> Stud_fName varchar(20),
+    -> Stud_lName varchar(20),
+    -> City varchar(20));
+Query OK, 0 rows affected (0.20 sec)
+
+mysql> desc student;
++------------+-------------+------+-----+---------+-------+
+| Field      | Type        | Null | Key | Default | Extra |
++------------+-------------+------+-----+---------+-------+
+| Student_Id | int(11)     | NO   | PRI | NULL    |       |
+| Stud_fName | varchar(20) | YES  |     | NULL    |       |
+| Stud_lName | varchar(20) | YES  |     | NULL    |       |
+| City       | varchar(20) | YES  |     | NULL    |       |
++------------+-------------+------+-----+---------+-------+
+4 rows in set (0.17 sec)
+
+mysql> insert into student values(1,'Devine','Putin','France');
+Query OK, 1 row affected (0.03 sec)
+
+mysql> insert into student values(2,'Michael','Clark','Australiya');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into student values(3,'Ethon','Miller','England');
+Query OK, 1 row affected (0.03 sec)
+
+mysql> insert into student values(4,'Mark','Strauss','America');
+Query OK, 1 row affected (0.03 sec)
+
+mysql> select * from student;
++------------+------------+------------+------------+
+| Student_Id | Stud_fName | Stud_lName | City       |
++------------+------------+------------+------------+
+|          1 | Devine     | Putin      | France     |
+|          2 | Michael    | Clark      | Australiya |
+|          3 | Ethon      | Miller     | England    |
+|          4 | Mark       | Strauss    | America    |
++------------+------------+------------+------------+
+4 rows in set (0.02 sec)
+
+mysql> create table technologies(
+    -> Student_Id int primary key,
+    -> Tech_Id int,
+    -> Institute_Name varchar(50),
+    -> Technology varchar(20));
+Query OK, 0 rows affected (0.08 sec)
+
+mysql> desc technologies;
++----------------+-------------+------+-----+---------+-------+
+| Field          | Type        | Null | Key | Default | Extra |
++----------------+-------------+------+-----+---------+-------+
+| Student_Id     | int(11)     | NO   | PRI | NULL    |       |
+| Tech_Id        | int(11)     | YES  |     | NULL    |       |
+| Institute_Name | varchar(50) | YES  |     | NULL    |       |
+| Technology     | varchar(20) | YES  |     | NULL    |       |
++----------------+-------------+------+-----+---------+-------+
+4 rows in set (0.14 sec)
+
+mysql> insert into technologies values(1,1,'Java Training Institute','Java');
+Query OK, 1 row affected (0.05 sec)
+
+mysql> insert into technologies values(2,2,'Chrome Campus','Angular');
+Query OK, 1 row affected (0.03 sec)
+
+mysql> insert into technologies values(3,3,'CEPTA Infotech','Big Data');
+Query OK, 1 row affected (0.09 sec)
+
+mysql> insert into technologies values(4,4,'Aptron','IOS');
+Query OK, 1 row affected (0.03 sec)
+
+mysql> select * from technologies;
++------------+---------+-------------------------+------------+
+| Student_Id | Tech_Id | Institute_Name          | Technology |
++------------+---------+-------------------------+------------+
+|          1 |       1 | Java Training Institute | Java       |
+|          2 |       2 | Chrome Campus           | Angular    |
+|          3 |       3 | CEPTA Infotech          | Big Data   |
+|          4 |       4 | Aptron                  | IOS        |
++------------+---------+-------------------------+------------+
+4 rows in set (0.00 sec)
+
+mysql> select * from student;
++------------+------------+------------+------------+
+| Student_Id | Stud_fName | Stud_lName | City       |
++------------+------------+------------+------------+
+|          1 | Devine     | Putin      | France     |
+|          2 | Michael    | Clark      | Australiya |
+|          3 | Ethon      | Miller     | England    |
+|          4 | Mark       | Strauss    | America    |
++------------+------------+------------+------------+
+4 rows in set (0.00 sec)
+
+mysql> select * from technologies;
++------------+---------+-------------------------+------------+
+| Student_Id | Tech_Id | Institute_Name          | Technology |
++------------+---------+-------------------------+------------+
+|          1 |       1 | Java Training Institute | Java       |
+|          2 |       2 | Chrome Campus           | Angular    |
+|          3 |       3 | CEPTA Infotech          | Big Data   |
+|          4 |       4 | Aptron                  | IOS        |
++------------+---------+-------------------------+------------+
+4 rows in set (0.00 sec)
+
+mysql> SELECT student.stud_fname, student.stud_lname, student.city, technologies.technology
+    -> FROM student
+    -> INNER JOIN technologies
+    -> ON student.student_id = technologies.tech_id;
++------------+------------+------------+------------+
+| stud_fname | stud_lname | city       | technology |
++------------+------------+------------+------------+
+| Devine     | Putin      | France     | Java       |
+| Michael    | Clark      | Australiya | Angular    |
+| Ethon      | Miller     | England    | Big Data   |
+| Mark       | Strauss    | America    | IOS        |
++------------+------------+------------+------------+
+4 rows in set (0.03 sec)
+
+mysql>  SELECT student.Student_Id, technologies.Institute_Name, student.city, technologies.technology
+    -> FROM student
+    -> INNER JOIN technologies
+    -> ON student.Student_Id = technologies.Tech_Id;
++------------+-------------------------+------------+------------+
+| Student_Id | Institute_Name          | city       | technology |
++------------+-------------------------+------------+------------+
+|          1 | Java Training Institute | France     | Java       |
+|          2 | Chrome Campus           | Australiya | Angular    |
+|          3 | CEPTA Infotech          | England    | Big Data   |
+|          4 | Aptron                  | America    | IOS        |
++------------+-------------------------+------------+------------+
+4 rows in set (0.00 sec)
+
+mysql> SELECT Tech_Id, Institute_Name, city, technology
+    -> FROM student
+    -> INNER JOIN technologies
+    -> USING (Student_Id) WHERE technology = "Java";
++---------+-------------------------+--------+------------+
+| Tech_Id | Institute_Name          | city   | technology |
++---------+-------------------------+--------+------------+
+|       1 | Java Training Institute | France | Java       |
++---------+-------------------------+--------+------------+
+1 row in set (0.05 sec)

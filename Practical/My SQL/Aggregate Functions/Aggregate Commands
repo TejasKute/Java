@@ -1,0 +1,71 @@
+
+mysql> use dynamite;
+Database changed
+mysql> create table product(
+    -> product_Id int primary key,
+    -> product_Name varchar(40),
+    -> company_Name varchar(50),
+    -> qty int);
+Query OK, 0 rows affected (0.21 sec)
+
+mysql> desc product;
++--------------+-------------+------+-----+---------+-------+
+| Field        | Type        | Null | Key | Default | Extra |
++--------------+-------------+------+-----+---------+-------+
+| product_Id   | int(11)     | NO   | PRI | NULL    |       |
+| product_Name | varchar(40) | YES  |     | NULL    |       |
+| company_Name | varchar(50) | YES  |     | NULL    |       |
+| qty          | int(11)     | YES  |     | NULL    |       |
++--------------+-------------+------+-----+---------+-------+
+4 rows in set (0.06 sec)
+
+mysql> insert into product values(101,'ProteinX','Nestle',2);
+Query OK, 1 row affected (0.03 sec)
+
+mysql> insert into product values(102,'Meswak','Dabar',30);
+Query OK, 1 row affected (0.03 sec)
+
+mysql> insert into product values(103,'Himalaya','HUL',10);
+Query OK, 1 row affected (0.02 sec)
+
+mysql> select * from product;
++------------+--------------+--------------+------+
+| product_Id | product_Name | company_Name | qty  |
++------------+--------------+--------------+------+
+|        101 | ProteinX     | Nestle       |    2 |
+|        102 | Meswak       | Dabar        |   30 |
+|        103 | Himalaya     | HUL          |   10 |
++------------+--------------+--------------+------+
+3 rows in set (0.00 sec)
+
+mysql> select count(*) from product;
++----------+
+| count(*) |
++----------+
+|        3 |
++----------+
+1 row in set (0.00 sec)
+
+mysql> select sum(qty) from product;
++----------+
+| sum(qty) |
++----------+
+|       42 |
++----------+
+1 row in set (0.01 sec)
+
+mysql> select avg(qty) from product;
++----------+
+| avg(qty) |
++----------+
+|  14.0000 |
++----------+
+1 row in set (0.00 sec)
+
+mysql> select max(qty) from product;
++----------+
+| max(qty) |
++----------+
+|       30 |
++----------+
+1 row in set (0.01 sec)

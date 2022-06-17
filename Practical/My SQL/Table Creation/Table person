@@ -1,0 +1,50 @@
+
+mysql> create table person(
+    -> Id int primary key not null,
+    -> FirstName varchar(20) not null,
+    -> LastName varchar(20) not null,
+    -> Address varchar(100) not null,
+    -> City varchar(10) not null
+    -> );
+Query OK, 0 rows affected (2.01 sec)
+
+mysql> desc person;
++-----------+--------------+------+-----+---------+-------+
+| Field     | Type         | Null | Key | Default | Extra |
++-----------+--------------+------+-----+---------+-------+
+| Id        | int(11)      | NO   | PRI | NULL    |       |
+| FirstName | varchar(20)  | NO   |     | NULL    |       |
+| LastName  | varchar(20)  | NO   |     | NULL    |       |
+| Address   | varchar(100) | NO   |     | NULL    |       |
+| City      | varchar(10)  | NO   |     | NULL    |       |
++-----------+--------------+------+-----+---------+-------+
+5 rows in set (0.80 sec)
+
+mysql> insert into person values(1,'Tejas','Kute','Ghatkopar','Mumbai');
+Query OK, 1 row affected (0.32 sec)
+
+mysql> insert into person values(2,'Anuja','Wadkar','Vashi','Navi Mumbai');
+ERROR 1406 (22001): Data too long for column 'City' at row 1
+mysql> insert into person values(2,'Anuja','Wadkar','Vashi','NaviMumbai');
+Query OK, 1 row affected (0.04 sec)
+
+mysql> insert into person values(3,'Jaya','Dambarake','Vashi','NaviMumbai');
+Query OK, 1 row affected (0.06 sec)
+
+mysql> insert into person values(4,'Shubham','Pawar','Vashi','NaviMumbai');
+Query OK, 1 row affected (0.02 sec)
+
+mysql> insert into person values(5,'Vikas','Reddy','Govandi','Mumbai');
+Query OK, 1 row affected (0.13 sec)
+
+mysql> select * from person;
++----+-----------+-----------+-----------+------------+
+| Id | FirstName | LastName  | Address   | City       |
++----+-----------+-----------+-----------+------------+
+|  1 | Tejas     | Kute      | Ghatkopar | Mumbai     |
+|  2 | Anuja     | Wadkar    | Vashi     | NaviMumbai |
+|  3 | Jaya      | Dambarake | Vashi     | NaviMumbai |
+|  4 | Shubham   | Pawar     | Vashi     | NaviMumbai |
+|  5 | Vikas     | Reddy     | Govandi   | Mumbai     |
++----+-----------+-----------+-----------+------------+
+5 rows in set (0.02 sec)
