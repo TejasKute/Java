@@ -1,0 +1,62 @@
+
+mysql> use dynamite;
+Database changed
+
+mysql> select * from student;
++------------+------------+------------+------------+
+| Student_Id | Stud_fName | Stud_lName | City       |
++------------+------------+------------+------------+
+|          1 | Devine     | Putin      | France     |
+|          2 | Michael    | Clark      | Australiya |
+|          3 | Ethon      | Miller     | England    |
+|          4 | Mark       | Strauss    | America    |
++------------+------------+------------+------------+
+4 rows in set (0.06 sec)
+
+mysql> select * from technologies;
++------------+---------+-------------------------+------------+
+| Student_Id | Tech_Id | Institute_Name          | Technology |
++------------+---------+-------------------------+------------+
+|          1 |       1 | Java Training Institute | Java       |
+|          2 |       2 | Chrome Campus           | Angular    |
+|          3 |       3 | CEPTA Infotech          | Big Data   |
+|          4 |       4 | Aptron                  | IOS        |
++------------+---------+-------------------------+------------+
+4 rows in set (0.03 sec)
+
+mysql> select * from contact;
++------------+------------+------------+
+| college_id | cellphone  | homephone  |
++------------+------------+------------+
+|          1 | 4862158937 | 9513758462 |
+|          2 | 7615834921 | 6549231870 |
+|          3 | 2586547931 | 4562587913 |
+|          4 | 9537156842 | 3579514682 |
++------------+------------+------------+
+4 rows in set (0.03 sec)
+
+mysql> select Student_Id, Institute_Name, City, Technology, cellphone
+    -> from student
+    -> INNER JOIN technologies USING (Student_Id)
+    -> INNER JOIN contact ORDER BY Student_Id;
++------------+-------------------------+------------+------------+------------+
+| Student_Id | Institute_Name          | City       | Technology | cellphone  |
++------------+-------------------------+------------+------------+------------+
+|          1 | Java Training Institute | France     | Java       | 7615834921 |
+|          1 | Java Training Institute | France     | Java       | 2586547931 |
+|          1 | Java Training Institute | France     | Java       | 9537156842 |
+|          1 | Java Training Institute | France     | Java       | 4862158937 |
+|          2 | Chrome Campus           | Australiya | Angular    | 9537156842 |
+|          2 | Chrome Campus           | Australiya | Angular    | 4862158937 |
+|          2 | Chrome Campus           | Australiya | Angular    | 7615834921 |
+|          2 | Chrome Campus           | Australiya | Angular    | 2586547931 |
+|          3 | CEPTA Infotech          | England    | Big Data   | 4862158937 |
+|          3 | CEPTA Infotech          | England    | Big Data   | 7615834921 |
+|          3 | CEPTA Infotech          | England    | Big Data   | 2586547931 |
+|          3 | CEPTA Infotech          | England    | Big Data   | 9537156842 |
+|          4 | Aptron                  | America    | IOS        | 2586547931 |
+|          4 | Aptron                  | America    | IOS        | 9537156842 |
+|          4 | Aptron                  | America    | IOS        | 4862158937 |
+|          4 | Aptron                  | America    | IOS        | 7615834921 |
++------------+-------------------------+------------+------------+------------+
+16 rows in set (0.03 sec)
