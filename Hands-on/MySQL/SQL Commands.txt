@@ -1,0 +1,134 @@
+
+mysql> USE DYNAMITE;
+Database changed
+mysql> create table product(
+    -> product_Id int primary key,
+    -> product_Name varchar(40),
+    -> company_Name varchar(50),
+    -> product_MRP int
+    -> );
+Query OK, 0 rows affected (0.12 sec)
+
+mysql> desc product;
++--------------+-------------+------+-----+---------+-------+
+| Field        | Type        | Null | Key | Default | Extra |
++--------------+-------------+------+-----+---------+-------+
+| product_Id   | int(11)     | NO   | PRI | NULL    |       |
+| product_Name | varchar(40) | YES  |     | NULL    |       |
+| company_Name | varchar(50) | YES  |     | NULL    |       |
+| product_MRP  | int(11)     | YES  |     | NULL    |       |
++--------------+-------------+------+-----+---------+-------+
+4 rows in set (0.04 sec)
+
+mysql> alter table product add product_Quantity int;
+Query OK, 0 rows affected (0.17 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc product;
++------------------+-------------+------+-----+---------+-------+
+| Field            | Type        | Null | Key | Default | Extra |
++------------------+-------------+------+-----+---------+-------+
+| product_Id       | int(11)     | NO   | PRI | NULL    |       |
+| product_Name     | varchar(40) | YES  |     | NULL    |       |
+| company_Name     | varchar(50) | YES  |     | NULL    |       |
+| product_MRP      | int(11)     | YES  |     | NULL    |       |
+| product_Quantity | int(11)     | YES  |     | NULL    |       |
++------------------+-------------+------+-----+---------+-------+
+5 rows in set (0.03 sec)
+
+mysql> alter table product rename to Product_Details;
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> desc Product_Details;
++------------------+-------------+------+-----+---------+-------+
+| Field            | Type        | Null | Key | Default | Extra |
++------------------+-------------+------+-----+---------+-------+
+| product_Id       | int(11)     | NO   | PRI | NULL    |       |
+| product_Name     | varchar(40) | YES  |     | NULL    |       |
+| company_Name     | varchar(50) | YES  |     | NULL    |       |
+| product_MRP      | int(11)     | YES  |     | NULL    |       |
+| product_Quantity | int(11)     | YES  |     | NULL    |       |
++------------------+-------------+------+-----+---------+-------+
+5 rows in set (0.06 sec)
+
+mysql> insert into Product_Details values(101,'ProteinX','Nestle',250,2);
+Query OK, 1 row affected (0.03 sec)
+
+mysql> insert into Product_Details values(102,'Yuppy','Sunfeast',40,20);
+Query OK, 1 row affected (0.03 sec)
+
+mysql> insert into Product_Details values(103,'Crosin 650','Cipla',60,50);
+Query OK, 1 row affected (0.03 sec)
+
+mysql> insert into Product_Details values(104,'Meswak','Dabar',20,30);
+Query OK, 1 row affected (0.02 sec)
+
+mysql> insert into Product_Details values(105,'Himalaya','HUL',80,10);
+Query OK, 1 row affected (0.02 sec)
+
+mysql> select * from Product_Details;
++------------+--------------+--------------+-------------+------------------+
+| product_Id | product_Name | company_Name | product_MRP | product_Quantity |
++------------+--------------+--------------+-------------+------------------+
+|        101 | ProteinX     | Nestle       |         250 |                2 |
+|        102 | Yuppy        | Sunfeast     |          40 |               20 |
+|        103 | Crosin 650   | Cipla        |          60 |               50 |
+|        104 | Meswak       | Dabar        |          20 |               30 |
+|        105 | Himalaya     | HUL          |          80 |               10 |
++------------+--------------+--------------+-------------+------------------+
+5 rows in set (0.00 sec)
+
+mysql> update Product_Details set product_Name='Crusial' where product_Id=103;
+Query OK, 1 row affected (0.07 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update Product_Details set company_Name='Ram MNF' where product_Id=103;
+Query OK, 1 row affected (0.03 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update Product_Details set product_MRP='3000' where product_Id=103;
+Query OK, 1 row affected (0.03 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update Product_Details set product_Quantity='1' where product_Id=103;
+Query OK, 1 row affected (0.02 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from Product_Details;
++------------+--------------+--------------+-------------+------------------+
+| product_Id | product_Name | company_Name | product_MRP | product_Quantity |
++------------+--------------+--------------+-------------+------------------+
+|        101 | ProteinX     | Nestle       |         250 |                2 |
+|        102 | Yuppy        | Sunfeast     |          40 |               20 |
+|        103 | Crusial      | Ram MNF      |        3000 |                1 |
+|        104 | Meswak       | Dabar        |          20 |               30 |
+|        105 | Himalaya     | HUL          |          80 |               10 |
++------------+--------------+--------------+-------------+------------------+
+5 rows in set (0.00 sec)
+
+mysql>  delete from Product_Details where product_Id=105;
+Query OK, 1 row affected (0.09 sec)
+
+mysql> select * from Product_Details;
++------------+--------------+--------------+-------------+------------------+
+| product_Id | product_Name | company_Name | product_MRP | product_Quantity |
++------------+--------------+--------------+-------------+------------------+
+|        101 | ProteinX     | Nestle       |         250 |                2 |
+|        102 | Yuppy        | Sunfeast     |          40 |               20 |
+|        103 | Crusial      | Ram MNF      |        3000 |                1 |
+|        104 | Meswak       | Dabar        |          20 |               30 |
++------------+--------------+--------------+-------------+------------------+
+4 rows in set (0.00 sec)
+
+mysql> truncate table Product_Details;
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> select * from Product_Details;
+Empty set (0.00 sec)
+
+mysql> drop table Product_Details;
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> select * from Product_Details;
+ERROR 1146 (42S02): Table 'dynamite.product_details' doesn't exist
+mysql>
