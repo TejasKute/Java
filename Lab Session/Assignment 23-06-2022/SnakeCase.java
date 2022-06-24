@@ -2,9 +2,9 @@ package corejava;
 
 public class SnakeCase 
 {
-	public String camelToSnake(String str)
-	 {
-		//Empty String
+public String camelToSnake(String str)
+{
+//Empty String
 String stt="";
 //Append First Character To Lower Case
 stt+=Character.toLowerCase(str.charAt(0));
