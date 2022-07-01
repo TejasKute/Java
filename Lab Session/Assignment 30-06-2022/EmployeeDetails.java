@@ -7,7 +7,7 @@ class Employee
     private long emp_id,emp_phone; 
     private String emp_name,emp_address; 
     private double basic_salary,special_allowance,house_rent_allowence;
-
+	
     Employee() 
     {
         emp_id = 0; 
@@ -29,7 +29,6 @@ Employee(long id,String n,String a,long p,double s)
     special_allowance=250.00; 
     house_rent_allowence = 1000.50; 
 }
-
 public double getbasic_salary()
 {
     return basic_salary;
@@ -40,7 +39,6 @@ public double getbasic_salary()
         double salary = basic_salary+(basic_salary*special_allowance*0.01)+(basic_salary* house_rent_allowence/100);
         return salary;
     }
-
     public double calculateTransportAllowance()
     {
         return 0.01*basic_salary;
@@ -54,8 +52,6 @@ class Manager extends Employee
 	    { 
 	        super(id,n,a,p,s);
 	    }
-
-	
     public double calculateTransportAllowance(Manager m,int a)
     {
         return 0.15*getbasic_salary();
@@ -64,15 +60,14 @@ class Manager extends Employee
 //Create a class "EmployeeDetails.java" with a main method. 
 class EmployeeDetails
 {
-	public static void main(String[] args) {
+	public static void main(String[] args) 
+	{
 		Scanner sc = new Scanner(System.in);
-		
 		Manager m = new Manager(Integer.parseInt(sc.nextLine()), sc.nextLine(), sc.nextLine(), Long.parseLong(sc.next()), Double.parseDouble(sc.next()));
-		//126534, "Peter", "Chennai India", 237844, 65000.0
+		//96, "Tejas", "Mumbai", 183143, 15000
 		sc.close();
 		double salary = m.calculateSalary();
 		System.out.println("Manager's Salary : " + salary);
 		System.out.println("Manager's Transport Allowance (15%) : " + m.calculateTransportAllowance(m, 15));
 	}
-
 }
