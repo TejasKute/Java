@@ -1,5 +1,6 @@
 package corejava;
 import java.io.*;
+import java.util.Scanner;
 //Create a class Employee with the following instance variables
 class Employee 
 { 
@@ -49,11 +50,12 @@ public double getbasic_salary()
  * Create overloaded constructors which takes the below parameters and initializes them to their respective variables in the Constructor parameter Instance Variable*/
 class Manager extends Employee
 {
-    Manager(long id,String n,String a,long p,double s) 
-    { 
-        super(id,n,a,p,s);
-    }
-    
+	 Manager(long id,String n,String a,long p,double s) 
+	    { 
+	        super(id,n,a,p,s);
+	    }
+
+	
     public double calculateTransportAllowance(Manager m,int a)
     {
         return 0.15*getbasic_salary();
@@ -62,11 +64,15 @@ class Manager extends Employee
 //Create a class "EmployeeDetails.java" with a main method. 
 class EmployeeDetails
 {
-    public static void main(String[] args) 
-    {
-        Manager m = new Manager(126534, "Peter", "Chennai India", 237844, 65000.0);
-double salary = m.calculateSalary(); 
-System.out.println("Manager's Salary : "+salary);
-System.out.println("Manager's Transport Allowance (15%) : "+m.calculateTransportAllowance(m, 15));   
-    }
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+		
+		Manager m = new Manager(Integer.parseInt(sc.nextLine()), sc.nextLine(), sc.nextLine(), Long.parseLong(sc.next()), Double.parseDouble(sc.next()));
+		//126534, "Peter", "Chennai India", 237844, 65000.0
+		sc.close();
+		double salary = m.calculateSalary();
+		System.out.println("Manager's Salary : " + salary);
+		System.out.println("Manager's Transport Allowance (15%) : " + m.calculateTransportAllowance(m, 15));
+	}
+
 }
